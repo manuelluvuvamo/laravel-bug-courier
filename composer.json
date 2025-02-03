@@ -1,0 +1,45 @@
+{
+  "name": "manuelluvuvamo/laravel-bug-courier",
+  "type": "library",
+  "license": "MIT",
+  "description": "A Laravel package to monitor and report bugs.",
+  "authors": [
+    {
+        "role": "Software Developer",
+        "name": "Manuel Luvuvamo",
+        "email": "65790902+manuelluvuvamo@users.noreply.github.com",
+        "homepage": "https://manuelluvuvamo.vercel.app/"
+    }
+],
+  "require": {
+        "php": "^7.4|^8.0",
+        "guzzlehttp/guzzle": "*",
+        "illuminate/support": "*",
+        "illuminate/http": "*"
+  },
+  "autoload": {
+      "psr-4": {
+          "ManuelLuvuvamo\\BugCourier\\": "src/"
+      }
+  },
+  "autoload-dev": {
+    "psr-4": {
+        "ManuelLuvuvamo\\BugCourier\\Tests\\": "tests/"
+    }
+},
+  "extra": {
+      "laravel": {
+          "providers": [
+              "ManuelLuvuvamo\\BugCourier\\Providers\\BugCourierServiceProvider"
+          ]
+      }
+  },
+  "require-dev": {
+    "pestphp/pest": "^1.23"
+  },
+  "config": {
+    "allow-plugins": {
+      "pestphp/pest-plugin": true
+    }
+  }
+}
