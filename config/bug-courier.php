@@ -10,6 +10,7 @@ return [
           'enabled' => false,
           'organization' => env('AZURE_DEVOPS_ORG'),
           'project' => env('AZURE_DEVOPS_PROJECT'),
+          'api_version' => env('AZURE_DEVOPS_API_VERSION', '7.1-preview.3'),
           'token' => env('AZURE_DEVOPS_TOKEN'),
           'area_path' => env('AZURE_DEVOPS_AREA_PATH'),
       ],
