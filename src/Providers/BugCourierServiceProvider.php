@@ -18,11 +18,11 @@ class BugCourierServiceProvider extends ServiceProvider
     $this->mergeConfigFrom(__DIR__ . '/../../config/bug-courier.php', 'bug-courier');
 
     $this->app->bind(ItemRepository::class, function ($app) {
-      if (Config::get('bug-courier.reporting.azure_devops.enable')) {
+      if (Config::get('bug-courier.reporting.azure_devops.enabled')) {
         return new ItemAzureDevopsRepository();
-      } else if (Config::get('bug-courier.reporting.github.enable')) {
+      } else if (Config::get('bug-courier.reporting.github.enabled')) {
         return new ItemGithubRepository();
-      } else if (Config::get('bug-courier.reporting.trello.enable')) {
+      } else if (Config::get('bug-courier.reporting.trello.enabled')) {
         return new ItemTrelloRepository();
       }
 
