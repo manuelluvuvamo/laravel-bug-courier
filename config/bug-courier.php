@@ -15,7 +15,11 @@ return [
       ],
       'github' => [
           'enabled' => false,
+          'owner' => env('GITHUB_OWNER'),
           'repo' => env('GITHUB_REPO'),
+          'assignees' => explode(',', env('GITHUB_ASSIGNEES')),
+          'labels' => explode(',', env('GITHUB_LABELS')),
+          'milestone' => env('GITHUB_MILESTONE'),
           'token' => env('GITHUB_TOKEN'),
       ],
       'trello' => [
