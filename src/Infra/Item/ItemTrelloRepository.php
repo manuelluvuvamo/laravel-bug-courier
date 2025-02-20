@@ -26,11 +26,11 @@ class ItemTrelloRepository implements ItemRepository
     $url = "{$this->baseUrl}cards";
 
     $query = [
-      'key' => config('bug-courier.trello.key'),
-      'token' => config('bug-courier.trello.token'),
+      'key' => config('bug-courier.reporting.trello.key'),
+      'token' => config('bug-courier.reporting.trello.token'),
       'name' => $item->title(),
       'desc' => $item->description(),
-      'idList' => config('bug-courier.trello.list_id')
+      'idList' => config('bug-courier.reporting.trello.list_id')
     ];
 
     $response = $this->client->post($url, [

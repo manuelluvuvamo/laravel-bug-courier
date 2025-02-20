@@ -19,7 +19,7 @@ class HandleServerError
 
             if ($response->getStatusCode() === 500) {
                 
-                $error_title = "Error 500 - " . class_basename($response->exception);
+                $error_title = "Error 500 - Execution Failure in " . $response->exception->getFile() . " Captured on ".  date('Y/m/d H:i:s');
 
                 $error_message = $response->exception->getMessage();
                 $error_file = $response->exception->getFile();
@@ -31,10 +31,10 @@ class HandleServerError
                 $detailed_error_message .= "File: $error_file\n\n";
                 $detailed_error_message .= "Line: $error_line\n\n";
                 $detailed_error_message .= "URL: $error_url\n\n";
-                $detailed_error_message .= "Stack Trace:\n\n$error_trace";
+                $detailed_error_message .= "Stack Trace: $error_trace";
 
-                Session::flexteash('exeption_message',$detailed_error_message);
-                Session::flash('exception_title', $error_title);
+                Session::put('exception_message',$detailed_error_message);
+                Session::put('exception_title', $error_title);
 
                 return response()->view('bug-courier::errors.500', [], 500);
             }

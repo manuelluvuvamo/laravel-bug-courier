@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>500 - Internal Server Error</title>
-    <link href="{{ asset('vendor/bug-courier/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('vendor/bug-courier/css/bootstrap.min.css') }}" rel="stylesheet">
     <style>
         body {
             background-color: #f8f9fa;
             text-align: center;
         }
+
         .error-container {
             margin-top: 10%;
         }
+
         .btn-custom {
             border-radius: 50px;
             padding: 10px 30px;
@@ -33,9 +36,9 @@
             position: absolute;
             left: 50%;
             -webkit-transform: translateX(-50%);
-                -ms-transform: translateX(-50%);
-                    transform: translateX(-50%);
-            background: url("{{ asset('vendor/bug-courier/images/bg2.jpg')}}") no-repeat;
+            -ms-transform: translateX(-50%);
+            transform: translateX(-50%);
+            background: url("{{ asset('vendor/bug-courier/images/bg2.jpg') }}") no-repeat;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-size: cover;
@@ -44,31 +47,34 @@
 
         @media only screen and (max-width: 767px) {
             .internalerror-500 {
-            height: 142px;
+                height: 142px;
             }
+
             .internalerror-500 h1 {
-            font-size: 112px;
+                font-size: 112px;
             }
         }
-
     </style>
 </head>
+
 <body>
     <div class="error-container">
         <div class="internalerror-500">
-				<h1>Oops!</h1>
-		</div>
+            <h1>Oops!</h1>
+        </div>
         <h2 class="text-dark fw-bold">500 - Internal Server Error</h2>
 
         @if (session('success'))
-            <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-success alert-dismissible fade show mt-3 mx-auto" role="alert"
+                style="max-width: 600px;">
                 {{ session('success') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
 
         @if (session('error'))
-            <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+            <div class="alert alert-danger alert-dismissible fade show mt-3 mx-auto" role="alert"
+                style="max-width: 600px;">
                 {{ session('error') }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
@@ -96,7 +102,8 @@
                         @csrf
                         <div class="mb-3 text-start">
                             <label class="form-label">Title</label>
-                            <input type="text" name="title" class="form-control" value="{{ session('exception_title') }}" readonly>
+                            <input type="text" name="title" class="form-control"
+                                value="{{ session('exception_title') }}" readonly>
                         </div>
                         <div class="mb-3 text-start">
                             <label class="form-label">Observations</label>
@@ -112,6 +119,7 @@
         </div>
     </div>
 
-    <script src="{{ asset('vendor/bug-courier/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{ asset('vendor/bug-courier/js/bootstrap.bundle.min.js') }}"></script>
 </body>
+
 </html>

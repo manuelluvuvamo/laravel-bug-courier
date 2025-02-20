@@ -13,7 +13,7 @@ class CreateItemDto
   public string $status;
 
   
-  public function __construct(string $title, string $description, array $metadata = [], string $status = null)
+  public function __construct(string $title, string $description, array $metadata = [], string $status = '')
     {
       $this->title = $title;
       $this->description = $description;

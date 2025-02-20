@@ -16,12 +16,15 @@ Route::group(['middleware' => ['web'], 'prefix' => 'bug-courier'], function () {
     try {
       $title = $request->input('title');
       $observations = $request->input('observations');
-      $error_message = Session::get('exeption_message');
+      $error_message = Session::get('exception_message');
       $description = "Observations: $observations\n\n$error_message";
 
       $data = new CreateItemDto($title, $description, []);
       $use_case->execute($data);
 
+      Session::forget('exception_message');
+      Session::forget('exception_title');
+      
       return Redirect::back()->with('success', 'Report sent successfully');
 
     } catch (\Exception $e) {
