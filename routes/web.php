@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemDto;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
 
-Route::group(['middleware' => ['web'], 'prefix' => 'bug-courier'], function () {
+Route::group(['middleware' => [config('bug-courier.routes.middleware')], 'prefix' => config('bug-courier.routes.prefix')], function () {
 
   Route::post('report', function (Request $request, CreateItemService $use_case) {
 
