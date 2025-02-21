@@ -1,0 +1,7 @@
+preset: laravel
+version: 8.2
+enabled:
+  - nullable_type_declarations
+finder:
+  not-name:
+    - bad-syntax-strategy.php
