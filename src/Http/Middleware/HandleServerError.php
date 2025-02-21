@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemDto;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
-use Symfony\Component\HttpFoundation\Response;
-use Throwable;
 
 class HandleServerError
 {
@@ -20,8 +18,7 @@ class HandleServerError
         $response = $next($request);
 
         if ($response->getStatusCode() === 500 and (config('bug-courier.automatic_reporting') or config('bug-courier.background_reporting'))) {
-
-            $error_title = "Error 500 - Execution Failure in " . $response->exception->getFile() . " Captured on " . date('Y/m/d H:i:s');
+            $error_title = 'Error 500 - Execution Failure in '.$response->exception->getFile().' Captured on '.date('Y/m/d H:i:s');
 
             $error_message = $response->exception->getMessage();
             $error_file = $response->exception->getFile();
