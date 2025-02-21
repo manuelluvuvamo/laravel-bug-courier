@@ -167,24 +167,22 @@ TRELLO_ENABLED=false
 
 ### Queueing Email Reports for Performance
 
-To send bug reports asynchronously via email, make sure your Laravel application is configured to use queues. In `config/queue.php`, set a valid queue driver (e.g., `database`, `redis`). Then, update the `CreateItemService` to dispatch an email job instead of sending it directly.
+The `laravel-bug-courier` package allows sending error reports via email either synchronously or asynchronously, depending on the `.env` configuration.
 
-```php
-use Illuminate\Support\Facades\Mail;
-use ManuelLuvuvamo\BugCourier\Mail\BugReportMail;
-use Illuminate\Support\Facades\Queue;
-
-Queue::push(function () use ($data) {
-    Mail::to(config('bug-courier.reporting.email.address'))
-        ->send(new BugReportMail($data));
-});
+To define the desired behavior, set the following variable:
+```ini
+BUG_COURIER_EMAIL_QUEUE=true # true for async sending, false for immediate sending
 ```
 
-To process the queued emails, run:
+If `BUG_COURIER_EMAIL_QUEUE=true`, the package will send emails using Laravel's queue system. Make sure your application is properly configured for queues in `config/queue.php` and that a worker is running:
 
 ```bash
 php artisan queue:work
 ```
+
+If `BUG_COURIER_EMAIL_QUEUE=false`, emails will be sent immediately without using queues.
+
+**Note:** There is no need to modify the `CreateItemService`. The package is already prepared to work with both options.
 
 ---
 
