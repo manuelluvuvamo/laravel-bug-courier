@@ -194,6 +194,21 @@ For additional details, refer to the `config/bug-courier.php` file and the `BugC
 
 ## Contribution Guide
 
+### Bug Reports
+
+If you find a bug in `laravel-bug-courier`, please open an **Issue** on GitHub.
+
+#### Before Submitting a Bug Report
+
+1. **Search open and closed issues** to check if the issue has already been reported.
+2. **If the issue is new**, open a new issue and include:
+   - A **clear description** of the problem.
+   - Steps to reproduce the bug.
+   - Any **error messages** you encountered.
+   - The Laravel and PHP versions you are using.
+
+> **Note:** Issues that do not follow this format may be closed without notice.
+
 ### Coding Standards
 
 This project follows the **PSR-1**, **PSR-4**, and **PSR-12** coding standards. Ensure your code adheres to these standards before submitting a pull request.
