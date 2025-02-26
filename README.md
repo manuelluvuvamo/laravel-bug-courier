@@ -116,7 +116,7 @@ The package provides repositories to interact with various bug tracking systems:
 You can use a specific repository directly if needed:
 
 ```php
-use ManuelLuvuvamo\BugCourier\Infrastructure\Repositories\ItemGithubRepository;
+use ManuelLuvuvamo\BugCourier\Infra\Item\ItemGithubRepository;
 
 $repository = app(ItemGithubRepository::class);
 $repository->save($data);
