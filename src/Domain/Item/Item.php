@@ -14,36 +14,36 @@ class Item
 
     public function __construct(string $title, string $description, array $metadata, string $status)
     {
-        $this->title       = $title;
+        $this->title = $title;
         $this->description = $description;
-        $this->metadata    = $metadata;
-        $this->status      = $status;
-        $this->createdAt   = new \DateTime();
-        $this->updatedAt   = new \DateTime();
+        $this->metadata = $metadata;
+        $this->status = $status;
+        $this->createdAt = new \DateTime();
+        $this->updatedAt = new \DateTime();
     }
 
     public function toArray(): array
     {
         return [
-            'id'          => $this->id,
-            'title'       => $this->title,
+            'id' => $this->id,
+            'title' => $this->title,
             'description' => $this->description,
-            'metadata'    => $this->metadata,
-            'status'      => $this->status,
-            'createdAt'   => $this->createdAt->format('d-m-Y H:i:s'),
-            'updatedAt'   => $this->updatedAt->format('d-m-Y H:i:s'),
+            'metadata' => $this->metadata,
+            'status' => $this->status,
+            'createdAt' => $this->createdAt->format('d-m-Y H:i:s'),
+            'updatedAt' => $this->updatedAt->format('d-m-Y H:i:s'),
         ];
     }
 
     public function fromArray(array $data): void
     {
-        $this->id          = $data['id'];
-        $this->title       = $data['title'];
+        $this->id = $data['id'];
+        $this->title = $data['title'];
         $this->description = $data['description'];
-        $this->metadata    = $data['metadata'];
-        $this->status      = $data['status'];
-        $this->createdAt   = new \DateTime($data['createdAt']);
-        $this->updatedAt   = new \DateTime($data['updatedAt']);
+        $this->metadata = $data['metadata'];
+        $this->status = $data['status'];
+        $this->createdAt = new \DateTime($data['createdAt']);
+        $this->updatedAt = new \DateTime($data['updatedAt']);
     }
 
     public function __toString(): string

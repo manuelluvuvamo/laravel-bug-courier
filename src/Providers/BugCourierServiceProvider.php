@@ -15,7 +15,7 @@ class BugCourierServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        $this->mergeConfigFrom(__DIR__ . '/../../config/bug-courier.php', 'bug-courier');
+        $this->mergeConfigFrom(__DIR__.'/../../config/bug-courier.php', 'bug-courier');
 
         $this->app->bind(ItemRepository::class, function ($app) {
             if (Config::get('bug-courier.reporting.azure_devops.enabled')) {
@@ -30,26 +30,26 @@ class BugCourierServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        $this->loadRoutesFrom(__DIR__ . '/../../routes/web.php');
+        $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
 
         $router = $this->app->make(Router::class);
 
         $router->pushMiddlewareToGroup('web', HandleServerError::class);
 
         if (config('bug-courier.views_enabled')) {
-            $this->loadViewsFrom(__DIR__ . '/../../resources/views', 'bug-courier');
+            $this->loadViewsFrom(__DIR__.'/../../resources/views', 'bug-courier');
         }
 
         $this->publishes([
-            __DIR__ . '/../../config/bug-courier.php' => config_path('bug-courier.php'),
+            __DIR__.'/../../config/bug-courier.php' => config_path('bug-courier.php'),
         ], 'bug-courier-config');
 
         $this->publishes([
-            __DIR__ . '/../../resources/assets' => public_path('vendor/bug-courier'),
+            __DIR__.'/../../resources/assets' => public_path('vendor/bug-courier'),
         ], 'bug-courier-assets');
 
         $this->publishes([
-            __DIR__ . '/../../resources/views' => resource_path('views/vendor/bug-courier'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/bug-courier'),
         ], 'bug-courier-views');
     }
 }
