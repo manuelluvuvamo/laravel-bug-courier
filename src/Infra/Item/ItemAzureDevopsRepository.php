@@ -14,33 +14,33 @@ class ItemAzureDevopsRepository implements ItemRepository
 
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client  = new Client();
         $this->baseUrl = 'https://dev.azure.com/';
 
         $this->headers = [
-            'Authorization' => 'Basic '.base64_encode(':'.config('bug-courier.reporting.azure_devops.token')),
-            'Content-Type' => 'application/json-patch+json',
+            'Authorization' => 'Basic ' . base64_encode(':' . config('bug-courier.reporting.azure_devops.token')),
+            'Content-Type'  => 'application/json-patch+json',
         ];
     }
 
     public function save(Item $item): void
     {
-        $url = "{$this->baseUrl}".config('bug-courier.reporting.azure_devops.organization').'/'.config('bug-courier.reporting.azure_devops.project').'/_apis/wit/workitems/$issue?api-version='.config('bug-courier.reporting.azure_devops.api_version');
+        $url = "{$this->baseUrl}" . config('bug-courier.reporting.azure_devops.organization') . '/' . config('bug-courier.reporting.azure_devops.project') . '/_apis/wit/workitems/$issue?api-version=' . config('bug-courier.reporting.azure_devops.api_version');
 
         $query = [
             [
-                'op' => 'add',
-                'path' => '/fields/System.Title',
+                'op'    => 'add',
+                'path'  => '/fields/System.Title',
                 'value' => $item->title(),
             ],
             [
-                'op' => 'add',
-                'path' => '/fields/System.Description',
+                'op'    => 'add',
+                'path'  => '/fields/System.Description',
                 'value' => $item->description(),
             ],
             [
-                'op' => 'add',
-                'path' => '/fields/System.AreaPath',
+                'op'    => 'add',
+                'path'  => '/fields/System.AreaPath',
                 'value' => config('bug-courier.reporting.azure_devops.area_path'),
             ],
         ];
@@ -49,15 +49,15 @@ class ItemAzureDevopsRepository implements ItemRepository
 
         foreach ($item->metadata() as $key => $value) {
             $query[] = [
-                'op' => 'add',
-                'path' => "/fields/{$key}",
+                'op'    => 'add',
+                'path'  => "/fields/{$key}",
                 'value' => $value,
             ];
         }
 
         $response = $this->client->post($url, [
             'headers' => $this->headers,
-            'json' => $query,
+            'json'    => $query,
         ]);
     }
 

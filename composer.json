@@ -35,7 +35,8 @@
       }
   },
   "require-dev": {
-    "pestphp/pest": "^1.23"
+    "pestphp/pest": "^1.23",
+    "friendsofphp/php-cs-fixer": "^3.70"
   },
   "config": {
     "allow-plugins": {

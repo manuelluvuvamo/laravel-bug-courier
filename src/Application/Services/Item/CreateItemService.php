@@ -31,15 +31,15 @@ class CreateItemService
     private function sendErrorEmail(Item $item): void
     {
         $emailData = [
-            'title' => $item->title(),
+            'title'       => $item->title(),
             'description' => $item->description(),
-            'metadata' => $item->metadata(),
+            'metadata'    => $item->metadata(),
         ];
 
         try {
             Mail::send('bug-courier::emails.item_report', $emailData, function ($message) {
                 $message->to(config('bug-courier.reporting.email.address'))
-                    ->subject('Error 500 - Execution Failure on '.date('Y/m/d H:i:s').' ['.env('APP_NAME').']');
+                    ->subject('Error 500 - Execution Failure on ' . date('Y/m/d H:i:s') . ' [' . env('APP_NAME') . ']');
             });
         } catch (\Throwable $exception) {
             \Log::error('Failed to send error report email', [

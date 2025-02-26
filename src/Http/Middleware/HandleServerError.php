@@ -18,13 +18,13 @@ class HandleServerError
         $response = $next($request);
 
         if ($response->getStatusCode() === 500 and (config('bug-courier.automatic_reporting') or config('bug-courier.background_reporting'))) {
-            $error_title = 'Error 500 - Execution Failure in '.$response->exception->getFile().' Captured on '.date('Y/m/d H:i:s');
+            $error_title = 'Error 500 - Execution Failure in ' . $response->exception->getFile() . ' Captured on ' . date('Y/m/d H:i:s');
 
             $error_message = $response->exception->getMessage();
-            $error_file = $response->exception->getFile();
-            $error_line = $response->exception->getLine();
-            $error_trace = $response->exception->getTraceAsString();
-            $error_url = $request->fullUrl();
+            $error_file    = $response->exception->getFile();
+            $error_line    = $response->exception->getLine();
+            $error_trace   = $response->exception->getTraceAsString();
+            $error_url     = $request->fullUrl();
 
             $detailed_error_message = "Error: $error_message\n\n";
             $detailed_error_message .= "File: $error_file\n\n";
@@ -47,11 +47,11 @@ class HandleServerError
 
     private function backgroudReport()
     {
-        $title = Session::get('exception_title');
+        $title       = Session::get('exception_title');
         $description = Session::get('exception_message');
 
         $use_case = app()->make(CreateItemService::class);
-        $data = new CreateItemDto($title, $description, []);
+        $data     = new CreateItemDto($title, $description, []);
         $use_case->execute($data);
 
         Session::forget('exception_message');

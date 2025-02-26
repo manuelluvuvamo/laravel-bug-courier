@@ -14,7 +14,7 @@ class ItemTrelloRepository implements ItemRepository
 
     public function __construct()
     {
-        $this->client = new Client();
+        $this->client  = new Client();
         $this->baseUrl = 'https://api.trello.com/1/';
         $this->headers = [
             'Accept' => 'application/json',
@@ -26,15 +26,15 @@ class ItemTrelloRepository implements ItemRepository
         $url = "{$this->baseUrl}cards";
 
         $query = [
-            'key' => config('bug-courier.reporting.trello.key'),
-            'token' => config('bug-courier.reporting.trello.token'),
-            'name' => $item->title(),
-            'desc' => $item->description(),
+            'key'    => config('bug-courier.reporting.trello.key'),
+            'token'  => config('bug-courier.reporting.trello.token'),
+            'name'   => $item->title(),
+            'desc'   => $item->description(),
             'idList' => config('bug-courier.reporting.trello.list_id'),
         ];
 
         $response = $this->client->post($url, [
-            'headers' => $this->headers,
+            'headers'     => $this->headers,
             'form_params' => $query,
         ]);
     }
