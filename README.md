@@ -192,3 +192,35 @@ If `BUG_COURIER_EMAIL_QUEUE=false`, emails will be sent immediately without usin
 
 For additional details, refer to the `config/bug-courier.php` file and the `BugCourierServiceProvider.php` service provider.
 
+## Contribution Guide
+
+### Coding Standards
+
+This project follows the **PSR-1**, **PSR-4**, and **PSR-12** coding standards. Ensure your code adheres to these standards before submitting a pull request.
+
+Additionally, we use **StyleCI** to automatically fix code style issues. You don't need to worry about formatting—StyleCI will handle it when your pull request is merged.
+
+### Code of Conduct
+
+This project follows the **Laravel Code of Conduct**, which is based on the Ruby Code of Conduct. Please adhere to the following guidelines:
+
+- Be respectful of opposing views.
+- Ensure your language and actions are free of personal attacks and disparaging remarks.
+- Assume good intentions when interpreting others' words and actions.
+- Harassment of any kind will not be tolerated.
+
+### Branching Strategy
+
+- **Bug fixes** should be sent to the latest stable version (currently **1.x**).
+- **Minor features** that are backward compatible can also be sent to the latest stable version.
+- **Major features** or breaking changes should be sent to the **master** branch.
+
+### Submitting a Pull Request
+
+1. **Fork** the repository and create a new branch from the latest `1.x` branch.
+2. Write clear, well-structured, and tested code.
+3. Ensure all tests pass before submitting (`vendor/bin/pest`).
+4. Open a **pull request**, providing a detailed description of your changes.
+
+For more details, refer to the project's **config/bug-courier.php** file and **BugCourierServiceProvider.php**.
+
