@@ -2,13 +2,12 @@
 
 namespace Tests\Unit\Application\Services\Item;
 
-use Illuminate\Mail\Mailable;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Mail;
-use Mockery;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemDto;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
 use ManuelLuvuvamo\BugCourier\Domain\Item\ItemRepository;
+use Mockery;
 use Orchestra\Testbench\TestCase;
 
 class CreateItemServiceTest extends TestCase
@@ -29,7 +28,7 @@ class CreateItemServiceTest extends TestCase
         $dto = new CreateItemDto('Error Title', 'Error Description', []);
 
         $this->expectNotToPerformAssertions();
-        
+
         $service->execute($dto);
     }
 

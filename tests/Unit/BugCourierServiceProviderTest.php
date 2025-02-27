@@ -22,7 +22,7 @@ class BugCourierServiceProviderTest extends TestCase
     public function test_config_is_merged()
     {
         $config = $this->app->make(ConfigRepository::class);
-        
+
         $this->assertNotNull($config->get('bug-courier'));
     }
 
