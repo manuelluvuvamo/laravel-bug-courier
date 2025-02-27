@@ -35,7 +35,8 @@
       }
   },
   "require-dev": {
-    "pestphp/pest": "^1.23"
+    "pestphp/pest": "^1.23",
+    "orchestra/testbench": "^8.18"
   },
   "config": {
     "allow-plugins": {

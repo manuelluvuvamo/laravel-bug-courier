@@ -90,4 +90,19 @@ class Item
     {
         $this->metadata = $metadata;
     }
+
+    public function status(): string
+    {
+        return $this->status;
+    }
+
+    public function createdAt(): \DateTime
+    {
+        return $this->createdAt;
+    }
+
+    public function updatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
 }
