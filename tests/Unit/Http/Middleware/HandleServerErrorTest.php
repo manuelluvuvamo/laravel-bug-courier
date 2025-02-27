@@ -5,12 +5,12 @@ namespace Tests\Feature\Http\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
+use ManuelLuvuvamo\BugCourier\Http\Middleware\HandleServerError;
 use ManuelLuvuvamo\BugCourier\Providers\BugCourierServiceProvider;
+use Mockery;
 use Orchestra\Testbench\TestCase;
 use Symfony\Component\HttpFoundation\Response;
-use ManuelLuvuvamo\BugCourier\Http\Middleware\HandleServerError;
-use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
-use Mockery;
 
 class HandleServerErrorTest extends TestCase
 {
@@ -39,7 +39,7 @@ class HandleServerErrorTest extends TestCase
         $response->exception = $exception;
 
         $middleware = new HandleServerError();
-        $middleware->handle($request, fn() => $response);
+        $middleware->handle($request, fn () => $response);
 
         $this->assertEquals('Error 500 - Execution Failure in '.$exception->getFile().' Captured on '.date('Y/m/d H:i:s'), Session::get('exception_title'));
         $this->assertStringContainsString('Test Exception', Session::get('exception_message'));
