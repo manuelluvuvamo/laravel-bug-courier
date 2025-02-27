@@ -31,7 +31,7 @@ class ItemReportMail extends Mailable
     {
         return $this->view('bug-courier::emails.item_report')
                     ->with($this->emailData)
-                    ->subject('Error 500 - Execution Failure on '.date('Y/m/d H:i:s').' ['.env('APP_NAME').']')
+                    ->subject('Error 500 - Execution Failure on '.date('Y/m/d H:i:s').' ['.config('app.name').']')
                     ->to(config('bug-courier.reporting.email.address'));
     }
 }
