@@ -38,14 +38,13 @@ class CreateItemService
         ];
 
         try {
-           $mailable = new ItemReportMail($emailData);
+            $mailable = new ItemReportMail($emailData);
 
             if (config('bug-courier.reporting.email.queue', false)) {
                 Mail::to(config('bug-courier.reporting.email.address'))->queue($mailable);
             } else {
                 Mail::to(config('bug-courier.reporting.email.address'))->send($mailable);
             }
-
         } catch (\Throwable $exception) {
             \Log::error('Failed to send error report email', [
                 'error' => $exception->getMessage(),
