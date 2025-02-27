@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Mail;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemDto;
 use ManuelLuvuvamo\BugCourier\Application\Services\Item\CreateItemService;
 use ManuelLuvuvamo\BugCourier\Domain\Item\ItemRepository;
+use ManuelLuvuvamo\BugCourier\Mail\ItemReportMail;
 use Mockery;
 use Orchestra\Testbench\TestCase;
 
@@ -16,6 +17,14 @@ class CreateItemServiceTest extends TestCase
     {
         Mockery::close();
         parent::tearDown();
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Illuminate\Mail\MailServiceProvider::class,
+            \ManuelLuvuvamo\BugCourier\Providers\BugCourierServiceProvider::class,
+        ];
     }
 
     public function test_it_saves_item_when_repository_is_available()
@@ -59,7 +68,31 @@ class CreateItemServiceTest extends TestCase
 
         $service->execute($dto);
 
-        Mail::assertNothingQueued();
+        Mail::assertSent(ItemReportMail::class, function ($mail) {
+            return $mail->hasTo('admin@example.com');
+        });
+    }
+
+    public function test_it_queues_email_when_reporting_is_enabled()
+    {
+        Config::set('bug-courier.reporting.email.enabled', true);
+        Config::set('bug-courier.reporting.email.queue', true);
+        Config::set('bug-courier.reporting.email.address', 'admin@example.com');
+
+        Mail::fake();
+
+        $repositoryMock = Mockery::mock(ItemRepository::class);
+        $repositoryMock->shouldReceive('save')->once();
+
+        $service = new CreateItemService($repositoryMock);
+
+        $dto = new CreateItemDto('Error Title', 'Error Description', []);
+
+        $service->execute($dto);
+
+        Mail::assertQueued(ItemReportMail::class, function ($mail) {
+            return $mail->hasTo('admin@example.com');
+        });
     }
 
     public function test_it_does_not_send_email_when_reporting_is_disabled()

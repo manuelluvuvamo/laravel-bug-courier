@@ -5,6 +5,7 @@ namespace ManuelLuvuvamo\BugCourier\Application\Services\Item;
 use Illuminate\Support\Facades\Mail;
 use ManuelLuvuvamo\BugCourier\Domain\Item\Item;
 use ManuelLuvuvamo\BugCourier\Domain\Item\ItemRepository;
+use ManuelLuvuvamo\BugCourier\Mail\ItemReportMail;
 
 class CreateItemService
 {
@@ -37,10 +38,14 @@ class CreateItemService
         ];
 
         try {
-            Mail::send('bug-courier::emails.item_report', $emailData, function ($message) {
-                $message->to(config('bug-courier.reporting.email.address'))
-                    ->subject('Error 500 - Execution Failure on '.date('Y/m/d H:i:s').' ['.env('APP_NAME').']');
-            });
+           $mailable = new ItemReportMail($emailData);
+
+            if (config('bug-courier.reporting.email.queue', false)) {
+                Mail::to(config('bug-courier.reporting.email.address'))->queue($mailable);
+            } else {
+                Mail::to(config('bug-courier.reporting.email.address'))->send($mailable);
+            }
+
         } catch (\Throwable $exception) {
             \Log::error('Failed to send error report email', [
                 'error' => $exception->getMessage(),

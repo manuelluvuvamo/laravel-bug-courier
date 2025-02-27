@@ -4,6 +4,7 @@ return [
     'reporting' => [
         'email' => [
             'enabled' => env('EMAIL_ENABLED', false),
+            'queue' => env('BUG_COURIER_EMAIL_QUEUE', false),
             'address' => env('BUG_MONITOR_EMAIL', 'bugs@example.com'),
         ],
         'azure_devops' => [
