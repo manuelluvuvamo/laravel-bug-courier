@@ -42,5 +42,8 @@
     "allow-plugins": {
       "pestphp/pest-plugin": true
     }
+  },
+  "support": {
+    "docs": "https://github.com/manuelluvuvamo/laravel-bug-courier-docs"
   }
 }
