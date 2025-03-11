@@ -194,6 +194,11 @@ For additional details, refer to the `config/bug-courier.php` file and the `BugC
 
 ## Contribution Guide
 
+We welcome contributions to both the package and its documentation.
+
+- 🛠 **To contribute to the package**, submit issues and pull requests at [Laravel Bug Courier]([https://github.com/SEU_USUARIO/laravel-bug-courier](https://github.com/manuelluvuvamo/laravel-bug-courier).
+- 📖 **To improve the documentation**, contribute at [Laravel Bug Courier Docs]([https://github.com/SEU_USUARIO/laravel-bug-courier-docs](https://github.com/manuelluvuvamo/laravel-bug-courier-docs)).
+
 ### Bug Reports
 
 If you find a bug in `laravel-bug-courier`, please open an **Issue** on GitHub.
